@@ -23,3 +23,10 @@ td, th {
 table tr:nth-child(odd) {
     background: #ddd;
 }
+
+.section {
+    border: 1px solid black;
+    margin: 1rem;
+    padding: 1rem;
+    padding-top: 0;
+}

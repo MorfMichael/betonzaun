@@ -7,13 +7,26 @@ import Section from './Section';
 const app = () => {
 
 	const [result, setResult] = useState([]);
+	const [counts,setCounts] = useState({
+		"Platte 200x50": 0,
+		"Platte 200x25": 0,
+		"Mittelsteher 100": 0,
+		"Mittelsteher 125": 0,
+		"Mittelsteher 150": 0,
+		"Mittelsteher 175": 0,
+		"Mittelsteher 200": 0,
+		"Mittelsteher 225": 0,
+		"Mittelsteher 250": 0,
+		"Endsteher": 0,
+	});
 	const [sum, setSum] = useState(0.0);
 
-	const [sections, setSections] = useState([
-		{ id: 1, type: 'Pillar', start: true },
+	const [insertType, setInsertType] = useState(null);
+
+	const [elements, setElements] = useState([
+		{ id: 1, type: 'Pillar' },
 		{ id: 2, type: 'Section' },
-		{ id: null, type: 'Add' },
-		{ id: 3, type: 'Pillar', end: true },
+		{ id: 3, type: 'Pillar' },
 	])
 
 	useEffect(() => {
@@ -22,78 +35,50 @@ const app = () => {
 		}
 	}, [result]);
 
-	const calculate = useCallback(event => {
-		event.preventDefault();
+	useEffect(() => {
+		if (!insertType) return;
 
-		let form = Object.fromEntries(new FormData(event.target).entries());
+		let ids = elements.map(x => x.id);
+		let newId = (ids.length > 0 ? Math.max(...elements.map(x => x.id)) : 0) + 1 ;
 
-		let c50 = Math.floor(form.height / 50);
-		let rest = form.height - c50 * 50;
-		let c25 = rest > 0 ? rest / 25 : 0;
+		setElements(elements.concat({ id: newId, type: event.target.value }));
+		setInsertType(null);
+	}, [insertType]);
 
-		let length = Math.ceil(form.length / 2);
-
-		c50 = c50 * length;
-		c25 = c25 * length;
-
-		let cMiddle = length - 1;
-		let cEnd = 2
-
-		let res = [];
-
-		if (c50 > 0) {
-			res.push({ label: "50er Platte", count: c50, path: "M 0 0 H 200 V 50 H 0 V 0", price: 12.59 });
-		}
-
-		if (c25 > 0) {
-			res.push({ label: "25er Platte", count: c25, path: "M 0 12.5 H 200 V 37.5 H 0 V 12.5", price: 8.99 });
-		}
-
-		if (cEnd > 0) {
-			res.push({ label: "Endsteher", count: cEnd, path: "M 0 5 H 30 V 15 H 10 V 35 H 30 V 45 H 0 V 5", price: 22.39 });
-		}
-
-		if (cMiddle > 0) {
-			res.push({ label: "Mittelsteher", count: cMiddle, path: "M 0 5 H 60 V 15 H 40 V 35 H 60 V 45 H 60 H 0 V 35 H 20 V 15 H 0 V 5", price: 28.29 });
-		}
-
-		setResult(res);
-	});
-
-	const addSection = useCallback((index) => (event) => {
-		console.log('bla');
-		let ids = sections.map(x => x.id);
-		let newId = Math.max(...ids) + 1;
-
-		console.log(sections[index-1]?.type);
-		if (sections[index-1]?.type == "Section") {
-			sections.splice(index,0, {id: newId, type: 'Pillar' },{ id: newId+1, type: 'Section' });
-		} else {
-			sections.splice(index,0,{ id: newId, type: 'Section' });
-		}
-		setSections(sections.slice());
-	});
+	useEffect(() => {
+		console.log(counts);
+	},[counts])
 
 	const removeSection = useCallback((id) => (event) => {
-		setSections(sections.filter(x => x.id != id));
+		setElements(elements.filter(x => x.id != id));
 	});
+
+	const calculate = useCallback(res => {
+		setCounts({ ...counts, ...res });
+	});
+
 
 	return (
 		<div>
 			{
-				sections.map((section, index) =>
-					<div key={index}>
+				elements.map((section) =>
+					<div key={section.id}>
 						{
 							{
-								Pillar: <Pillar />,
-								Section: <Section />,
-								Add: <button onClick={addSection(index)}>Abschnitt einfügen</button>
+								Pillar: <Pillar changed={calculate} />,
+								Section: <Section changed={calculate} />,
 							}[section.type]
 						}
-						{ section.type != 'Add' && <button disabled={section.start || section.end} onClick={removeSection(section.id)}>remove</button> }
+						{section.type != 'Add' && <button disabled={section.start || section.end} onClick={removeSection(section.id)}>remove</button>}
 					</div>
 				)
 			}
+			<select onChange={e => setInsertType(e.target.value || null)} value={insertType || ''}>
+				<option value="">&lt;Einf&uuml;gen&gt;</option>
+				<option value="Section">Abschnitt</option>
+				<option value="Pillar">Steher</option>
+			</select><br />
+			<button onClick={calculate}>berechnen</button>
 			<table border="0" cellSpacing="0">
 				<thead>
 					<tr>

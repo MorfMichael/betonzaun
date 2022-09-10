@@ -1,32 +1,46 @@
-import { useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
-const Pillar = ({ changed }) => {
+const Pillar = ({ changed, section, products }) => {
+
+	const [error, setError] = useState('');
 
 	const calculate = useCallback((event) => {
+		setError(false);
 		let form = Object.fromEntries(new FormData(event.target.form).entries());
+
+		let product = products.find(x => x.type == "Pillar" && x.properties.height == form.height && x.properties.material == form.material && x.properties.variant == form.variant);
+
+		if (product) {
+			let result = {}
+			result[product.id] = Number(form.count);
+			section.result = result;
+			changed();
+		} else {
+			setError('no pillar found!');
+		}
 	})
 
 	return (
-		<div className="section">
+		<div className={`section ${error ? 'error' : ''}`}>
 			<h4>Steher</h4>
 			<form onChange={calculate}>
 				<p>
-				<label htmlFor="material">Material: </label>
-				<select id="material" name="material">
-					<option value="Beton">Beton</option>
-					<option value="Eisen">Eisen</option>
-				</select>
+					<label htmlFor="material">Material: </label>
+					<select id="material" name="material">
+						<option value="Beton">Beton</option>
+						<option value="Eisen">Eisen</option>
+					</select>
 				</p>
 
 				<p>
 					<label htmlFor="variant">Ausführung: </label>
 					<select id="variant" name="variant">
-						<option value="end">Endsteher</option>
-						<option value="center">Mittelsteher</option>
+						<option value="Endsteher">Endsteher</option>
+						<option value="Mittelsteher">Mittelsteher</option>
 						<option value="90">90°</option>
 						<option value="45">45°</option>
 					</select>
-				</p> 
+				</p>
 
 				<p>
 					<label htmlFor="height">Höhe: </label>
@@ -40,7 +54,16 @@ const Pillar = ({ changed }) => {
 						<option value="250">2,50 m</option>
 					</select>
 				</p>
+
+				<p>
+					<label htmlFor="count">Anzahl: </label>
+					<input id="count" name="count" type="number" min="1" max="20" step="1" />
+				</p>
 			</form>
+			{error && 
+			<p>
+				{error}
+			</p>}
 		</div>
 	);
 }

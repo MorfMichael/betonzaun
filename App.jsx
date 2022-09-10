@@ -1,24 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import { formatCurrency } from './Methods';
 
+import Products from './Products';
+
 import Pillar from './Pillar';
 import Section from './Section';
 
-const app = () => {
+const App = () => {
 
 	const [result, setResult] = useState([]);
-	const [counts,setCounts] = useState({
-		"Platte 200x50": 0,
-		"Platte 200x25": 0,
-		"Mittelsteher 100": 0,
-		"Mittelsteher 125": 0,
-		"Mittelsteher 150": 0,
-		"Mittelsteher 175": 0,
-		"Mittelsteher 200": 0,
-		"Mittelsteher 225": 0,
-		"Mittelsteher 250": 0,
-		"Endsteher": 0,
-	});
 	const [sum, setSum] = useState(0.0);
 
 	const [insertType, setInsertType] = useState(null);
@@ -41,42 +31,38 @@ const app = () => {
 		let ids = elements.map(x => x.id);
 		let newId = (ids.length > 0 ? Math.max(...elements.map(x => x.id)) : 0) + 1 ;
 
-		setElements(elements.concat({ id: newId, type: event.target.value }));
+		setElements(elements.concat({ id: newId, type: insertType }));
 		setInsertType(null);
 	}, [insertType]);
-
-	useEffect(() => {
-		console.log(counts);
-	},[counts])
 
 	const removeSection = useCallback((id) => (event) => {
 		setElements(elements.filter(x => x.id != id));
 	});
 
 	const calculate = useCallback(res => {
-		setCounts({ ...counts, ...res });
+		console.log(elements);
 	});
 
 
 	return (
 		<div>
 			{
-				elements.map((section) =>
+				elements.map(section =>
 					<div key={section.id}>
 						{
 							{
-								Pillar: <Pillar changed={calculate} />,
-								Section: <Section changed={calculate} />,
+								Pillar: <Pillar changed={calculate} section={section} products={Products} />,
+								Section: <Section changed={calculate} section={section} products={Products} />,
 							}[section.type]
 						}
-						{section.type != 'Add' && <button disabled={section.start || section.end} onClick={removeSection(section.id)}>remove</button>}
+						<button onClick={removeSection(section.id)}>remove</button>
 					</div>
 				)
 			}
 			<select onChange={e => setInsertType(e.target.value || null)} value={insertType || ''}>
 				<option value="">&lt;Einf&uuml;gen&gt;</option>
-				<option value="Section">Abschnitt</option>
 				<option value="Pillar">Steher</option>
+				<option value="Section">Abschnitt</option>
 			</select><br />
 			<button onClick={calculate}>berechnen</button>
 			<table border="0" cellSpacing="0">
@@ -109,4 +95,4 @@ const app = () => {
 	);
 }
 
-export default app;
+export default App;

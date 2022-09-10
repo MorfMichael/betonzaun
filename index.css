@@ -30,3 +30,7 @@ table tr:nth-child(odd) {
     padding: 1rem;
     padding-top: 0;
 }
+
+.error {
+    border: 1px solid red;
+}

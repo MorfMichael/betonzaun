@@ -26246,26 +26246,16 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _methods = require("./Methods");
+var _products = require("./Products");
+var _productsDefault = parcelHelpers.interopDefault(_products);
 var _pillar = require("./Pillar");
 var _pillarDefault = parcelHelpers.interopDefault(_pillar);
 var _section = require("./Section");
 var _sectionDefault = parcelHelpers.interopDefault(_section);
 var _s = $RefreshSig$();
-const app = ()=>{
+const App = ()=>{
     _s();
     const [result, setResult] = (0, _react.useState)([]);
-    const [counts, setCounts] = (0, _react.useState)({
-        "Platte 200x50": 0,
-        "Platte 200x25": 0,
-        "Mittelsteher 100": 0,
-        "Mittelsteher 125": 0,
-        "Mittelsteher 150": 0,
-        "Mittelsteher 175": 0,
-        "Mittelsteher 200": 0,
-        "Mittelsteher 225": 0,
-        "Mittelsteher 250": 0,
-        "Endsteher": 0
-    });
     const [sum, setSum] = (0, _react.useState)(0.0);
     const [insertType, setInsertType] = (0, _react.useState)(null);
     const [elements, setElements] = (0, _react.useState)([
@@ -26293,25 +26283,17 @@ const app = ()=>{
         let newId = (ids.length > 0 ? Math.max(...elements.map((x)=>x.id)) : 0) + 1;
         setElements(elements.concat({
             id: newId,
-            type: event.target.value
+            type: insertType
         }));
         setInsertType(null);
     }, [
         insertType
     ]);
-    (0, _react.useEffect)(()=>{
-        console.log(counts);
-    }, [
-        counts
-    ]);
-    const removeSection = (0, _react.useCallback)((id)=>(event1)=>{
+    const removeSection = (0, _react.useCallback)((id)=>(event)=>{
             setElements(elements.filter((x)=>x.id != id));
         });
     const calculate = (0, _react.useCallback)((res)=>{
-        setCounts({
-            ...counts,
-            ...res
-        });
+        console.log(elements);
     });
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
@@ -26319,33 +26301,36 @@ const app = ()=>{
                     children: [
                         {
                             Pillar: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _pillarDefault.default), {
-                                changed: calculate
+                                changed: calculate,
+                                section: section,
+                                products: (0, _productsDefault.default)
                             }, void 0, false, {
                                 fileName: "App.jsx",
-                                lineNumber: 68,
+                                lineNumber: 54,
                                 columnNumber: 17
                             }, undefined),
                             Section: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _sectionDefault.default), {
-                                changed: calculate
+                                changed: calculate,
+                                section: section,
+                                products: (0, _productsDefault.default)
                             }, void 0, false, {
                                 fileName: "App.jsx",
-                                lineNumber: 69,
+                                lineNumber: 55,
                                 columnNumber: 18
                             }, undefined)
                         }[section.type],
-                        section.type != "Add" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                            disabled: section.start || section.end,
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                             onClick: removeSection(section.id),
                             children: "remove"
                         }, void 0, false, {
                             fileName: "App.jsx",
-                            lineNumber: 72,
-                            columnNumber: 33
+                            lineNumber: 58,
+                            columnNumber: 7
                         }, undefined)
                     ]
                 }, section.id, true, {
                     fileName: "App.jsx",
-                    lineNumber: 65,
+                    lineNumber: 51,
                     columnNumber: 6
                 }, undefined)),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -26357,15 +26342,7 @@ const app = ()=>{
                         children: "<Einf\xfcgen>"
                     }, void 0, false, {
                         fileName: "App.jsx",
-                        lineNumber: 77,
-                        columnNumber: 5
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                        value: "Section",
-                        children: "Abschnitt"
-                    }, void 0, false, {
-                        fileName: "App.jsx",
-                        lineNumber: 78,
+                        lineNumber: 63,
                         columnNumber: 5
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -26373,18 +26350,26 @@ const app = ()=>{
                         children: "Steher"
                     }, void 0, false, {
                         fileName: "App.jsx",
-                        lineNumber: 79,
+                        lineNumber: 64,
+                        columnNumber: 5
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                        value: "Section",
+                        children: "Abschnitt"
+                    }, void 0, false, {
+                        fileName: "App.jsx",
+                        lineNumber: 65,
                         columnNumber: 5
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "App.jsx",
-                lineNumber: 76,
+                lineNumber: 62,
                 columnNumber: 4
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                 fileName: "App.jsx",
-                lineNumber: 80,
+                lineNumber: 66,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -26392,7 +26377,7 @@ const app = ()=>{
                 children: "berechnen"
             }, void 0, false, {
                 fileName: "App.jsx",
-                lineNumber: 81,
+                lineNumber: 67,
                 columnNumber: 4
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("table", {
@@ -26406,46 +26391,46 @@ const app = ()=>{
                                     children: "Beschreibung"
                                 }, void 0, false, {
                                     fileName: "App.jsx",
-                                    lineNumber: 85,
+                                    lineNumber: 71,
                                     columnNumber: 7
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                     children: "Anzahl"
                                 }, void 0, false, {
                                     fileName: "App.jsx",
-                                    lineNumber: 86,
+                                    lineNumber: 72,
                                     columnNumber: 7
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                     children: "Abbildung"
                                 }, void 0, false, {
                                     fileName: "App.jsx",
-                                    lineNumber: 87,
+                                    lineNumber: 73,
                                     columnNumber: 7
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                     children: "Einzelpreis"
                                 }, void 0, false, {
                                     fileName: "App.jsx",
-                                    lineNumber: 88,
+                                    lineNumber: 74,
                                     columnNumber: 7
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
                                     children: "Preis"
                                 }, void 0, false, {
                                     fileName: "App.jsx",
-                                    lineNumber: 89,
+                                    lineNumber: 75,
                                     columnNumber: 7
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "App.jsx",
-                            lineNumber: 84,
+                            lineNumber: 70,
                             columnNumber: 6
                         }, undefined)
                     }, void 0, false, {
                         fileName: "App.jsx",
-                        lineNumber: 83,
+                        lineNumber: 69,
                         columnNumber: 5
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tbody", {
@@ -26455,7 +26440,7 @@ const app = ()=>{
                                         children: entry.label
                                     }, void 0, false, {
                                         fileName: "App.jsx",
-                                        lineNumber: 95,
+                                        lineNumber: 81,
                                         columnNumber: 8
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -26465,7 +26450,7 @@ const app = ()=>{
                                         ]
                                     }, void 0, true, {
                                         fileName: "App.jsx",
-                                        lineNumber: 96,
+                                        lineNumber: 82,
                                         columnNumber: 8
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -26478,17 +26463,17 @@ const app = ()=>{
                                                 d: entry.path
                                             }, void 0, false, {
                                                 fileName: "App.jsx",
-                                                lineNumber: 97,
+                                                lineNumber: 83,
                                                 columnNumber: 29
                                             }, undefined)
                                         }, void 0, false, {
                                             fileName: "App.jsx",
-                                            lineNumber: 97,
+                                            lineNumber: 83,
                                             columnNumber: 12
                                         }, undefined)
                                     }, void 0, false, {
                                         fileName: "App.jsx",
-                                        lineNumber: 97,
+                                        lineNumber: 83,
                                         columnNumber: 8
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -26496,12 +26481,12 @@ const app = ()=>{
                                             children: (0, _methods.formatCurrency)(entry.price)
                                         }, void 0, false, {
                                             fileName: "App.jsx",
-                                            lineNumber: 98,
+                                            lineNumber: 84,
                                             columnNumber: 12
                                         }, undefined)
                                     }, void 0, false, {
                                         fileName: "App.jsx",
-                                        lineNumber: 98,
+                                        lineNumber: 84,
                                         columnNumber: 8
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -26509,34 +26494,34 @@ const app = ()=>{
                                             children: (0, _methods.formatCurrency)(entry.price * entry.count)
                                         }, void 0, false, {
                                             fileName: "App.jsx",
-                                            lineNumber: 99,
+                                            lineNumber: 85,
                                             columnNumber: 12
                                         }, undefined)
                                     }, void 0, false, {
                                         fileName: "App.jsx",
-                                        lineNumber: 99,
+                                        lineNumber: 85,
                                         columnNumber: 8
                                     }, undefined)
                                 ]
                             }, i, true, {
                                 fileName: "App.jsx",
-                                lineNumber: 94,
+                                lineNumber: 80,
                                 columnNumber: 7
                             }, undefined))
                     }, void 0, false, {
                         fileName: "App.jsx",
-                        lineNumber: 92,
+                        lineNumber: 78,
                         columnNumber: 5
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "App.jsx",
-                lineNumber: 82,
+                lineNumber: 68,
                 columnNumber: 4
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
                 fileName: "App.jsx",
-                lineNumber: 104,
+                lineNumber: 90,
                 columnNumber: 4
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -26547,30 +26532,33 @@ const app = ()=>{
                     ]
                 }, void 0, true, {
                     fileName: "App.jsx",
-                    lineNumber: 106,
+                    lineNumber: 92,
                     columnNumber: 5
                 }, undefined)
             }, void 0, false, {
                 fileName: "App.jsx",
-                lineNumber: 105,
+                lineNumber: 91,
                 columnNumber: 4
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "App.jsx",
-        lineNumber: 62,
+        lineNumber: 48,
         columnNumber: 3
     }, undefined);
 };
-_s(app, "QbRnnH0dwvpMs+jg48a83d18ATg=");
-exports.default = app;
+_s(App, "fB/F5Rgi1Ddgs02OHFYfao3HqUE=");
+_c = App;
+exports.default = App;
+var _c;
+$RefreshReg$(_c, "App");
 
   $parcel$ReactRefreshHelpers$53a7.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Methods":"2lTmE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Pillar":"ihNBz","./Section":"9QnN2"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./Methods":"2lTmE","./Pillar":"ihNBz","./Section":"9QnN2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Products":"5zN5p"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("./cjs/react-jsx-dev-runtime.development.js");
 
@@ -27443,7 +27431,287 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"km3Ru":[function(require,module,exports) {
+},{}],"ihNBz":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$22a4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$22a4.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _s = $RefreshSig$();
+const Pillar = ({ changed , section , products  })=>{
+    _s();
+    const [error, setError] = (0, _react.useState)("");
+    const calculate = (0, _react.useCallback)((event)=>{
+        setError(false);
+        let form = Object.fromEntries(new FormData(event.target.form).entries());
+        let product = products.find((x)=>x.type == "Pillar" && x.properties.height == form.height && x.properties.material == form.material && x.properties.variant == form.variant);
+        if (product) {
+            let result = {};
+            result[product.id] = Number(form.count);
+            section.result = result;
+            changed();
+        } else setError("no pillar found!");
+    });
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: `section ${error ? "error" : ""}`,
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
+                children: "Steher"
+            }, void 0, false, {
+                fileName: "Pillar.jsx",
+                lineNumber: 25,
+                columnNumber: 4
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+                onChange: calculate,
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                htmlFor: "material",
+                                children: "Material: "
+                            }, void 0, false, {
+                                fileName: "Pillar.jsx",
+                                lineNumber: 28,
+                                columnNumber: 6
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
+                                id: "material",
+                                name: "material",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "Beton",
+                                        children: "Beton"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 30,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "Eisen",
+                                        children: "Eisen"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 31,
+                                        columnNumber: 7
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "Pillar.jsx",
+                                lineNumber: 29,
+                                columnNumber: 6
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "Pillar.jsx",
+                        lineNumber: 27,
+                        columnNumber: 5
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                htmlFor: "variant",
+                                children: "Ausf\xfchrung: "
+                            }, void 0, false, {
+                                fileName: "Pillar.jsx",
+                                lineNumber: 36,
+                                columnNumber: 6
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
+                                id: "variant",
+                                name: "variant",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "Endsteher",
+                                        children: "Endsteher"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 38,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "Mittelsteher",
+                                        children: "Mittelsteher"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 39,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "90",
+                                        children: "90\xb0"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 40,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "45",
+                                        children: "45\xb0"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 41,
+                                        columnNumber: 7
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "Pillar.jsx",
+                                lineNumber: 37,
+                                columnNumber: 6
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "Pillar.jsx",
+                        lineNumber: 35,
+                        columnNumber: 5
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                htmlFor: "height",
+                                children: "H\xf6he: "
+                            }, void 0, false, {
+                                fileName: "Pillar.jsx",
+                                lineNumber: 46,
+                                columnNumber: 6
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
+                                id: "height",
+                                name: "height",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "100",
+                                        children: "1,00 m"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 48,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "125",
+                                        children: "1,25 m"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 49,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "150",
+                                        children: "1,50 m"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 50,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "175",
+                                        children: "1,75 m"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 51,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "200",
+                                        children: "2,00 m"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 52,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "225",
+                                        children: "2,25 m"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 53,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
+                                        value: "250",
+                                        children: "2,50 m"
+                                    }, void 0, false, {
+                                        fileName: "Pillar.jsx",
+                                        lineNumber: 54,
+                                        columnNumber: 7
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "Pillar.jsx",
+                                lineNumber: 47,
+                                columnNumber: 6
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "Pillar.jsx",
+                        lineNumber: 45,
+                        columnNumber: 5
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                htmlFor: "count",
+                                children: "Anzahl: "
+                            }, void 0, false, {
+                                fileName: "Pillar.jsx",
+                                lineNumber: 59,
+                                columnNumber: 6
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                id: "count",
+                                name: "count",
+                                type: "number",
+                                min: "1",
+                                max: "20",
+                                step: "1"
+                            }, void 0, false, {
+                                fileName: "Pillar.jsx",
+                                lineNumber: 60,
+                                columnNumber: 6
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "Pillar.jsx",
+                        lineNumber: 58,
+                        columnNumber: 5
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "Pillar.jsx",
+                lineNumber: 26,
+                columnNumber: 4
+            }, undefined),
+            error && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                children: error
+            }, void 0, false, {
+                fileName: "Pillar.jsx",
+                lineNumber: 64,
+                columnNumber: 4
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "Pillar.jsx",
+        lineNumber: 24,
+        columnNumber: 3
+    }, undefined);
+};
+_s(Pillar, "awzEvJnwXTASCbCYZfbCIC+EtNg=");
+_c = Pillar;
+exports.default = Pillar;
+var _c;
+$RefreshReg$(_c, "Pillar");
+
+  $parcel$ReactRefreshHelpers$22a4.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"km3Ru":[function(require,module,exports) {
 "use strict";
 var Refresh = require("react-refresh/runtime");
 function debounce(func, delay) {
@@ -27563,243 +27831,7 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"react-refresh/runtime":"786KC"}],"ihNBz":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$22a4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$22a4.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _s = $RefreshSig$();
-const Pillar = ({ changed  })=>{
-    _s();
-    const calculate = (0, _react.useCallback)((event)=>{
-        let form = Object.fromEntries(new FormData(event.target.form).entries());
-    });
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "section",
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
-                children: "Steher"
-            }, void 0, false, {
-                fileName: "Pillar.jsx",
-                lineNumber: 11,
-                columnNumber: 4
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
-                onChange: calculate,
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                htmlFor: "material",
-                                children: "Material: "
-                            }, void 0, false, {
-                                fileName: "Pillar.jsx",
-                                lineNumber: 14,
-                                columnNumber: 5
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
-                                id: "material",
-                                name: "material",
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "Beton",
-                                        children: "Beton"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 16,
-                                        columnNumber: 6
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "Eisen",
-                                        children: "Eisen"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 17,
-                                        columnNumber: 6
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "Pillar.jsx",
-                                lineNumber: 15,
-                                columnNumber: 5
-                            }, undefined)
-                        ]
-                    }, void 0, true, {
-                        fileName: "Pillar.jsx",
-                        lineNumber: 13,
-                        columnNumber: 5
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                htmlFor: "variant",
-                                children: "Ausf\xfchrung: "
-                            }, void 0, false, {
-                                fileName: "Pillar.jsx",
-                                lineNumber: 22,
-                                columnNumber: 6
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
-                                id: "variant",
-                                name: "variant",
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "end",
-                                        children: "Endsteher"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 24,
-                                        columnNumber: 7
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "center",
-                                        children: "Mittelsteher"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 25,
-                                        columnNumber: 7
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "90",
-                                        children: "90\xb0"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 26,
-                                        columnNumber: 7
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "45",
-                                        children: "45\xb0"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 27,
-                                        columnNumber: 7
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "Pillar.jsx",
-                                lineNumber: 23,
-                                columnNumber: 6
-                            }, undefined)
-                        ]
-                    }, void 0, true, {
-                        fileName: "Pillar.jsx",
-                        lineNumber: 21,
-                        columnNumber: 5
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                htmlFor: "height",
-                                children: "H\xf6he: "
-                            }, void 0, false, {
-                                fileName: "Pillar.jsx",
-                                lineNumber: 32,
-                                columnNumber: 6
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
-                                id: "height",
-                                name: "height",
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "100",
-                                        children: "1,00 m"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 34,
-                                        columnNumber: 7
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "125",
-                                        children: "1,25 m"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 35,
-                                        columnNumber: 7
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "150",
-                                        children: "1,50 m"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 36,
-                                        columnNumber: 7
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "175",
-                                        children: "1,75 m"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 37,
-                                        columnNumber: 7
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "200",
-                                        children: "2,00 m"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 38,
-                                        columnNumber: 7
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "225",
-                                        children: "2,25 m"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 39,
-                                        columnNumber: 7
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
-                                        value: "250",
-                                        children: "2,50 m"
-                                    }, void 0, false, {
-                                        fileName: "Pillar.jsx",
-                                        lineNumber: 40,
-                                        columnNumber: 7
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "Pillar.jsx",
-                                lineNumber: 33,
-                                columnNumber: 6
-                            }, undefined)
-                        ]
-                    }, void 0, true, {
-                        fileName: "Pillar.jsx",
-                        lineNumber: 31,
-                        columnNumber: 5
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "Pillar.jsx",
-                lineNumber: 12,
-                columnNumber: 4
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "Pillar.jsx",
-        lineNumber: 10,
-        columnNumber: 3
-    }, undefined);
-};
-_s(Pillar, "6LpRTTi3KpIZUW2icEUYlsd5Q7s=");
-_c = Pillar;
-exports.default = Pillar;
-var _c;
-$RefreshReg$(_c, "Pillar");
-
-  $parcel$ReactRefreshHelpers$22a4.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq"}],"9QnN2":[function(require,module,exports) {
+},{"react-refresh/runtime":"786KC"}],"9QnN2":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$33af = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -27811,33 +27843,36 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _s = $RefreshSig$();
-const Section = ({ changed  })=>{
+const calculatePlates = (height, length)=>{
+    let plate50 = Math.floor(height / 50);
+    let rest = height - plate50 * 50;
+    let plate25 = rest > 0 ? rest / 25 : 0;
+    let l = Math.ceil(length / 2);
+    plate50 = plate50 * l;
+    plate25 = plate25 * l;
+    let pillars = l > 0 ? l - 1 : 0;
+    return {
+        plate50,
+        plate25,
+        pillars
+    };
+};
+const Section = ({ changed , section , products  })=>{
     _s();
-    const [result, setResult] = (0, _react.useState)([]);
     const calculate = (0, _react.useCallback)((event)=>{
         event.preventDefault();
         if (changed) {
             let form = Object.fromEntries(new FormData(event.target.form).entries());
-            let c50 = Math.floor(form.height / 50);
-            let rest = form.height - c50 * 50;
-            let c25 = rest > 0 ? rest / 25 : 0;
-            let length = Math.ceil(form.length / 2);
-            c50 = c50 * length;
-            c25 = c25 * length;
-            let cMiddle = length > 0 ? length - 1 : 0;
-            let res = {
-                "Platte 200x50": c50,
-                "Platte 200x25": c25,
-                "Mittelsteher 100": 0,
-                "Mittelsteher 125": 0,
-                "Mittelsteher 150": 0,
-                "Mittelsteher 175": 0,
-                "Mittelsteher 200": 0,
-                "Mittelsteher 225": 0,
-                "Mittelsteher 250": 0
-            };
-            res["Mittelsteher " + form.height] = cMiddle;
-            changed(res);
+            let count = calculatePlates(form.height, form.length);
+            let pillar = products.find((x)=>x.type == "Pillar" && x.properties.height == form.height && x.properties.variant == "Mittelsteher" && x.properties.material == "Beton");
+            let plate50 = products.find((x)=>x.type == "Plate" && x.properties.height == 50 && x.properties.material == "Beton" && x.properties.pattern == "Steinoptik");
+            let plate25 = products.find((x)=>x.type == "Plate" && x.properties.height == 25 && x.properties.material == "Beton" && x.properties.pattern == "Steinoptik");
+            let result = {};
+            result[plate50.id] = count.plate50;
+            result[plate25.id] = count.plate25;
+            result[pillar.id] = count.pillars;
+            section.result = result;
+            changed(section);
         }
     });
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27847,7 +27882,7 @@ const Section = ({ changed  })=>{
                 children: "Abschnitt"
             }, void 0, false, {
                 fileName: "Section.jsx",
-                lineNumber: 41,
+                lineNumber: 42,
                 columnNumber: 4
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -27861,7 +27896,7 @@ const Section = ({ changed  })=>{
                                 children: "L\xe4nge: "
                             }, void 0, false, {
                                 fileName: "Section.jsx",
-                                lineNumber: 44,
+                                lineNumber: 45,
                                 columnNumber: 6
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -27873,14 +27908,14 @@ const Section = ({ changed  })=>{
                                 step: ".1"
                             }, void 0, false, {
                                 fileName: "Section.jsx",
-                                lineNumber: 45,
+                                lineNumber: 46,
                                 columnNumber: 6
                             }, undefined),
                             " m"
                         ]
                     }, void 0, true, {
                         fileName: "Section.jsx",
-                        lineNumber: 43,
+                        lineNumber: 44,
                         columnNumber: 5
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -27890,7 +27925,7 @@ const Section = ({ changed  })=>{
                                 children: "H\xf6he: "
                             }, void 0, false, {
                                 fileName: "Section.jsx",
-                                lineNumber: 48,
+                                lineNumber: 49,
                                 columnNumber: 6
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -27902,7 +27937,7 @@ const Section = ({ changed  })=>{
                                         children: "1,00 m"
                                     }, void 0, false, {
                                         fileName: "Section.jsx",
-                                        lineNumber: 50,
+                                        lineNumber: 51,
                                         columnNumber: 7
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27910,7 +27945,7 @@ const Section = ({ changed  })=>{
                                         children: "1,25 m"
                                     }, void 0, false, {
                                         fileName: "Section.jsx",
-                                        lineNumber: 51,
+                                        lineNumber: 52,
                                         columnNumber: 7
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27918,7 +27953,7 @@ const Section = ({ changed  })=>{
                                         children: "1,50 m"
                                     }, void 0, false, {
                                         fileName: "Section.jsx",
-                                        lineNumber: 52,
+                                        lineNumber: 53,
                                         columnNumber: 7
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27926,7 +27961,7 @@ const Section = ({ changed  })=>{
                                         children: "1,75 m"
                                     }, void 0, false, {
                                         fileName: "Section.jsx",
-                                        lineNumber: 53,
+                                        lineNumber: 54,
                                         columnNumber: 7
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27934,7 +27969,7 @@ const Section = ({ changed  })=>{
                                         children: "2,00 m"
                                     }, void 0, false, {
                                         fileName: "Section.jsx",
-                                        lineNumber: 54,
+                                        lineNumber: 55,
                                         columnNumber: 7
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27942,7 +27977,7 @@ const Section = ({ changed  })=>{
                                         children: "2,25 m"
                                     }, void 0, false, {
                                         fileName: "Section.jsx",
-                                        lineNumber: 55,
+                                        lineNumber: 56,
                                         columnNumber: 7
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27950,35 +27985,35 @@ const Section = ({ changed  })=>{
                                         children: "2,50 m"
                                     }, void 0, false, {
                                         fileName: "Section.jsx",
-                                        lineNumber: 56,
+                                        lineNumber: 57,
                                         columnNumber: 7
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "Section.jsx",
-                                lineNumber: 49,
+                                lineNumber: 50,
                                 columnNumber: 6
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "Section.jsx",
-                        lineNumber: 47,
+                        lineNumber: 48,
                         columnNumber: 5
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "Section.jsx",
-                lineNumber: 42,
+                lineNumber: 43,
                 columnNumber: 4
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "Section.jsx",
-        lineNumber: 40,
+        lineNumber: 41,
         columnNumber: 3
     }, undefined);
 };
-_s(Section, "AR3jyiKnNTM2ZUJ2vpyrSVRsz6Y=");
+_s(Section, "6LpRTTi3KpIZUW2icEUYlsd5Q7s=");
 _c = Section;
 exports.default = Section;
 var _c;
@@ -27989,6 +28024,99 @@ $RefreshReg$(_c, "Section");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq"}]},["1xC6H","awEvQ","bB7Pu"], "bB7Pu", "parcelRequire0b72")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"5zN5p":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const Products = [
+    {
+        "id": 1,
+        "type": "Pillar",
+        "label": "Mittelsteher 100",
+        "price": 32.69,
+        "properties": {
+            "height": 100,
+            "material": "Beton",
+            "variant": "Mittelsteher"
+        },
+        "path": ""
+    },
+    {
+        "id": 2,
+        "type": "Pillar",
+        "label": "Mittelsteher 125",
+        "price": 38.69,
+        "properties": {
+            "height": 125,
+            "material": "Beton",
+            "variant": "Mittelsteher"
+        },
+        "path": ""
+    },
+    {
+        "id": 3,
+        "type": "Pillar",
+        "label": "Mittelsteher 150",
+        "price": 41.59,
+        "properties": {
+            "height": 150,
+            "material": "Beton",
+            "variant": "Mittelsteher"
+        },
+        "path": ""
+    },
+    {
+        "id": 4,
+        "type": "Pillar",
+        "label": "Mittelsteher 175",
+        "price": 44.59,
+        "properties": {
+            "height": 175,
+            "material": "Beton",
+            "variant": "Mittelsteher"
+        },
+        "path": ""
+    },
+    {
+        "id": 5,
+        "type": "Pillar",
+        "label": "Mittelsteher 200",
+        "price": 48.69,
+        "properties": {
+            "height": 200,
+            "material": "Beton",
+            "variant": "Mittelsteher"
+        },
+        "path": ""
+    },
+    {
+        "id": 6,
+        "type": "Plate",
+        "label": "Platte 200x50",
+        "price": 23.49,
+        "properties": {
+            "height": 50,
+            "width": 200,
+            "material": "Beton",
+            "pattern": "Steinoptik"
+        },
+        "path": ""
+    },
+    {
+        "id": 7,
+        "type": "Plate",
+        "label": "Platte 200x25",
+        "price": 16.69,
+        "properties": {
+            "height": 25,
+            "width": 200,
+            "material": "Beton",
+            "pattern": "Steinoptik"
+        },
+        "path": ""
+    }
+];
+exports.default = Products;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["1xC6H","awEvQ","bB7Pu"], "bB7Pu", "parcelRequire0b72")
 
 //# sourceMappingURL=index.3d214d75.js.map

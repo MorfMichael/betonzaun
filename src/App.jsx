@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { formatCurrency } from './Methods';
+import { formatCurrency } from './misc/Methods';
 
-import Products from './Products';
+import Products from './misc/Products';
 
-import Pillar from './Pillar';
-import Section from './Section';
+import Pillar from './components/Pillar';
+import Section from './components/Section';
 
 const App = () => {
 
@@ -41,7 +41,6 @@ const App = () => {
 
 	const removeSection = useCallback((id) => (event) => {
 		setElements(elements.filter(x => x.id != id));
-		console.log(elements);
 	});
 
 	const update = useCallback(() => {

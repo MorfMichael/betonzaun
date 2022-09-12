@@ -17,8 +17,6 @@ const calculatePlates = (height, length) => {
 
 const Section = ({ changed, section, products }) => {
 
-	const [result,setResult] = useState({});
-
 	const calculate = useCallback(event => {
 		event.preventDefault();
 
@@ -35,7 +33,6 @@ const Section = ({ changed, section, products }) => {
 			if (count.plate25 > 0) res[plate25.id] = count.plate25;
 			if (count.pillars > 0) res[pillar.id] = count.pillars;
 
-			setResult(res);
 			section.result = res;
 			changed();
 		}
@@ -62,9 +59,6 @@ const Section = ({ changed, section, products }) => {
 					</select>
 				</p>
 			</form>
-			<p>
-				{ JSON.stringify(result) }
-			</p>
 		</div>
 	);
 }

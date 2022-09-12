@@ -3,6 +3,7 @@ import { useState, useCallback } from 'react';
 const Pillar = ({ changed, section, products }) => {
 
 	const [error, setError] = useState('');
+	const [result, setResult] = useState({});
 
 	const calculate = useCallback((event) => {
 		setError(false);
@@ -11,12 +12,16 @@ const Pillar = ({ changed, section, products }) => {
 		let product = products.find(x => x.type == "Pillar" && x.properties.height == form.height && x.properties.material == form.material && x.properties.variant == form.variant);
 
 		if (product) {
-			let result = {}
-			result[product.id] = Number(form.count);
-			section.result = result;
+			let res = {}
+			if (form.count > 0) res[product.id] = Number(form.count);
+			setResult(res);
+			section.result = res;
 			changed();
 		} else {
+			section.result = {};
+			setResult({});
 			setError('no pillar found!');
+			changed();
 		}
 	})
 
@@ -60,6 +65,9 @@ const Pillar = ({ changed, section, products }) => {
 					<input id="count" name="count" type="number" min="1" max="20" step="1" />
 				</p>
 			</form>
+			<p>
+				{ JSON.stringify(result) }
+			</p>
 			{error && 
 			<p>
 				{error}

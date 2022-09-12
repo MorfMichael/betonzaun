@@ -17,6 +17,8 @@ const calculatePlates = (height, length) => {
 
 const Section = ({ changed, section, products }) => {
 
+	const [result,setResult] = useState({});
+
 	const calculate = useCallback(event => {
 		event.preventDefault();
 
@@ -28,12 +30,14 @@ const Section = ({ changed, section, products }) => {
 			let plate50 = products.find(x => x.type == "Plate" && x.properties.height == 50 && x.properties.material == "Beton" && x.properties.pattern == "Steinoptik");
 			let plate25 = products.find(x => x.type == "Plate" && x.properties.height == 25 && x.properties.material == "Beton" && x.properties.pattern == "Steinoptik");
 
-			let result = {};
-			result[plate50.id] = count.plate50;
-			result[plate25.id] = count.plate25;
-			result[pillar.id] = count.pillars;
-			section.result = result;
-			changed(section);
+			let res = {};
+			if (count.plate50 > 0) res[plate50.id] = count.plate50;
+			if (count.plate25 > 0) res[plate25.id] = count.plate25;
+			if (count.pillars > 0) res[pillar.id] = count.pillars;
+
+			setResult(res);
+			section.result = res;
+			changed();
 		}
 	});
 
@@ -58,6 +62,9 @@ const Section = ({ changed, section, products }) => {
 					</select>
 				</p>
 			</form>
+			<p>
+				{ JSON.stringify(result) }
+			</p>
 		</div>
 	);
 }

@@ -14,9 +14,9 @@ const App = () => {
 	const [insertType, setInsertType] = useState(null);
 
 	const [elements, setElements] = useState([
-		{ id: 1, type: 'Pillar' },
-		{ id: 2, type: 'Section' },
-		{ id: 3, type: 'Pillar' },
+		{ id: 1, type: 'Pillar', result: {} },
+		{ id: 2, type: 'Section', result: {} },
+		{ id: 3, type: 'Pillar', result: {} },
 	])
 
 	useEffect(() => {
@@ -26,23 +26,39 @@ const App = () => {
 	}, [result]);
 
 	useEffect(() => {
+		update();
+	}, [elements])
+
+	useEffect(() => {
 		if (!insertType) return;
 
 		let ids = elements.map(x => x.id);
-		let newId = (ids.length > 0 ? Math.max(...elements.map(x => x.id)) : 0) + 1 ;
+		let newId = (ids.length > 0 ? Math.max(...elements.map(x => x.id)) : 0) + 1;
 
-		setElements(elements.concat({ id: newId, type: insertType }));
+		setElements(elements.concat({ id: newId, type: insertType, result: {} }));
 		setInsertType(null);
 	}, [insertType]);
 
 	const removeSection = useCallback((id) => (event) => {
 		setElements(elements.filter(x => x.id != id));
-	});
-
-	const calculate = useCallback(res => {
 		console.log(elements);
 	});
 
+	const update = useCallback(() => {
+		let res = elements.reduce((prev, cur) => {
+			Object.keys(cur.result).forEach(key => prev[key] ? prev[key] += cur.result[key] : prev[key] = cur.result[key]);
+			return prev;
+		}, {});
+
+		let result = []
+		Object.keys(res).forEach(x => {
+			let prod = Products.find(p => p.id == x);
+			if (prod) {
+				result.push({ ...prod, count: res[x] });
+			}
+		});
+		setResult(result);
+	});
 
 	return (
 		<div>
@@ -51,8 +67,8 @@ const App = () => {
 					<div key={section.id}>
 						{
 							{
-								Pillar: <Pillar changed={calculate} section={section} products={Products} />,
-								Section: <Section changed={calculate} section={section} products={Products} />,
+								Pillar: <Pillar changed={update} section={section} products={Products} />,
+								Section: <Section changed={update} section={section} products={Products} />,
 							}[section.type]
 						}
 						<button onClick={removeSection(section.id)}>remove</button>
@@ -64,7 +80,7 @@ const App = () => {
 				<option value="Pillar">Steher</option>
 				<option value="Section">Abschnitt</option>
 			</select><br />
-			<button onClick={calculate}>berechnen</button>
+			<button onClick={update}>berechnen</button>
 			<table border="0" cellSpacing="0">
 				<thead>
 					<tr>

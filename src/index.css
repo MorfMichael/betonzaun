@@ -25,10 +25,15 @@ table tr:nth-child(odd) {
 }
 
 .section {
+    display: flex;
+    align-items: center;
     border: 1px solid black;
     margin: 1rem;
     padding: 1rem;
-    padding-top: 0;
+}
+
+.section > * {
+    margin: 1rem;
 }
 
 .error {

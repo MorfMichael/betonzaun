@@ -67,10 +67,9 @@ const App = () => {
 						{
 							{
 								Pillar: <Pillar changed={update} section={section} products={Products} />,
-								Section: <Section changed={update} section={section} products={Products} />,
+								Section: <Section changed={update} section={section} products={Products} remove={removeSection} />,
 							}[section.type]
 						}
-						<button onClick={removeSection(section.id)}>remove</button>
 					</div>
 				)
 			}

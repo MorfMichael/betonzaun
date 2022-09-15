@@ -1,3 +1,5 @@
+import { TextField, FormControl, InputAdornment, Select, MenuItem, Button } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useState, useCallback, useEffect } from "react";
 
 const calculatePlates = (height, length) => {
@@ -15,7 +17,7 @@ const calculatePlates = (height, length) => {
 	return { plate50, plate25, pillars };
 }
 
-const Section = ({ changed, section, products }) => {
+const Section = ({ changed, section, products, remove }) => {
 
 	const calculate = useCallback(event => {
 		event.preventDefault();
@@ -40,25 +42,31 @@ const Section = ({ changed, section, products }) => {
 
 	return (
 		<div className="section">
-			<h4>Abschnitt</h4>
-			<form onChange={calculate} method="POST">
-				<p>
-					<label htmlFor="length">Länge: </label>
-					<input type="number" id="length" name="length" min=".5" max="50" step=".1" /> m
-				</p>
-				<p>
-					<label htmlFor="height">Höhe: </label>
-					<select id="height" name="height">
-						<option value="100">1,00 m</option>
-						<option value="125">1,25 m</option>
-						<option value="150">1,50 m</option>
-						<option value="175">1,75 m</option>
-						<option value="200">2,00 m</option>
-						<option value="225">2,25 m</option>
-						<option value="250">2,50 m</option>
-					</select>
-				</p>
+			<form onSubmit={calculate} method="POST">
+				<TextField
+					id="length" type="number" variant="filled"
+					label="L&auml;nge"
+					name="length" min=".5" max="200" step=".1"
+					endAdornment={<InputAdornment position="end">m</InputAdornment>} />
+
+				<TextField
+					id="height" name="height" select style={{ width: "100px" }}
+					variant="filled" label="H&ouml;he">
+					<MenuItem value={100}>1,00 m</MenuItem>
+					<MenuItem value={125}>1,25 m</MenuItem>
+					<MenuItem value={150}>1,50 m</MenuItem>
+					<MenuItem value={175}>1,75 m</MenuItem>
+					<MenuItem value={200}>2,00 m</MenuItem>
+					<MenuItem value={225}>2,25 m</MenuItem>
+					<MenuItem value={250}>2,50 m</MenuItem>
+				</TextField>
+
+				<Button variant="contained" startIcon={<DeleteIcon />} onClick={remove(section.id)}>
+					Delete
+				</Button>
 			</form>
+
+
 		</div>
 	);
 }

@@ -23,9 +23,8 @@ table tr:nth-child(2n+1) {
 }
 
 .main {
-  width: 70vw;
-  min-width: 600px;
-  margin: 0 auto;
+  width: 800px;
+  min-width: 800px;
 }
 
 .section {

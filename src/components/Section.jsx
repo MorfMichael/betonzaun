@@ -49,7 +49,7 @@ const Section = ({ changed, section, products, remove }) => {
 				<TextField
 					id="length" type="number" variant="outlined"
 					label="L&auml;nge"
-					name="length" min=".5" max="200" step=".1" size="small" /> m
+					name="length" min=".5" max="200" step=".1" size="small" style={{ width: "100px" }} /> m
 
 				<TextField
 					id="height" name="height" select style={{ width: "100px" }}
@@ -63,7 +63,7 @@ const Section = ({ changed, section, products, remove }) => {
 					<MenuItem value={250}>2,50 m</MenuItem>
 				</TextField>
 
-				<IconButton aria-label="delete" onClick={remove(section.id)} className="right">
+				<IconButton aria-label="delete" onClick={remove(section.id)}>
 					<DeleteIcon />
 				</IconButton>
 			</form>

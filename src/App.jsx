@@ -66,7 +66,7 @@ const App = () => {
 					<div key={section.id}>
 						{
 							{
-								Pillar: <Pillar changed={update} section={section} products={Products} />,
+								Pillar: <Pillar changed={update} section={section} products={Products} remove={removeSection} />,
 								Section: <Section changed={update} section={section} products={Products} remove={removeSection} />,
 							}[section.type]
 						}

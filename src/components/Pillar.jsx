@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
+import { TextField, MenuItem, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-const Pillar = ({ changed, section, products }) => {
+const Pillar = ({ changed, section, products, remove }) => {
 
 	const [error, setError] = useState('');
 
@@ -24,48 +26,48 @@ const Pillar = ({ changed, section, products }) => {
 
 	return (
 		<div className={`section ${error ? 'error' : ''}`}>
-			<h4>Steher</h4>
-			<form onChange={calculate}>
-				<p>
-					<label htmlFor="material">Material: </label>
-					<select id="material" name="material">
-						<option value="Beton">Beton</option>
-						<option value="Eisen">Eisen</option>
-					</select>
-				</p>
+			<form onChange={calculate} className="flex-center">
+				<span className="label">Steher</span>
+				<TextField
+					id="material" name="material" select stlye={{ width: "300px" }}
+					variant="outlined" label="Material" defaultValue="Beton" size="small">
+					<MenuItem value="Beton">Beton</MenuItem>
+					<MenuItem value="Eisen">Eisen</MenuItem>
+				</TextField>
 
-				<p>
-					<label htmlFor="variant">Ausführung: </label>
-					<select id="variant" name="variant">
-						<option value="Endsteher">Endsteher</option>
-						<option value="Mittelsteher">Mittelsteher</option>
-						<option value="90">90°</option>
-						<option value="45">45°</option>
-					</select>
-				</p>
+				<TextField
+					id="variant" name="variant" label="Ausf&uuml;hrung" size="small" select
+					style={{ width: "200px" }} defaultValue="Endsteher">
+					<MenuItem value="Endsteher">Endsteher</MenuItem>
+					<MenuItem value="Mittelsteher">Mittelsteher</MenuItem>
+					<MenuItem value="90">90°</MenuItem>
+					<MenuItem value="45">45°</MenuItem>
+				</TextField>
 
-				<p>
-					<label htmlFor="height">Höhe: </label>
-					<select id="height" name="height">
-						<option value="100">1,00 m</option>
-						<option value="125">1,25 m</option>
-						<option value="150">1,50 m</option>
-						<option value="175">1,75 m</option>
-						<option value="200">2,00 m</option>
-						<option value="225">2,25 m</option>
-						<option value="250">2,50 m</option>
-					</select>
-				</p>
+				<TextField
+					id="height" name="height" select style={{ width: "100px" }}
+					variant="outlined" label="H&ouml;he" defaultValue={100} size="small">
+					<MenuItem value={100}>1,00 m</MenuItem>
+					<MenuItem value={125}>1,25 m</MenuItem>
+					<MenuItem value={150}>1,50 m</MenuItem>
+					<MenuItem value={175}>1,75 m</MenuItem>
+					<MenuItem value={200}>2,00 m</MenuItem>
+					<MenuItem value={225}>2,25 m</MenuItem>
+					<MenuItem value={250}>2,50 m</MenuItem>
+				</TextField>
 
-				<p>
-					<label htmlFor="count">Anzahl: </label>
-					<input id="count" name="count" type="number" min="1" max="20" step="1" />
-				</p>
+				<TextField
+					id="count" type="number" variant="outlined" label="Anzahl"
+					name="count" min="1" max="50" step="1" size="small" style={{ width: "100px" }} />
+
+				<IconButton aria-label="delete" onClick={remove(section.id)}>
+					<DeleteIcon />
+				</IconButton>
 			</form>
-			{error && 
-			<p>
-				{error}
-			</p>}
+			{error &&
+				<p>
+					{error}
+				</p>}
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-import { TextField, FormControl, InputAdornment, Select, MenuItem, Button } from "@mui/material";
+import { TextField, MenuItem, Button, Card, CardHeader, CardContent, IconButton } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState, useCallback, useEffect } from "react";
 
@@ -42,16 +42,18 @@ const Section = ({ changed, section, products, remove }) => {
 
 	return (
 		<div className="section">
-			<form onSubmit={calculate} method="POST">
+			<form onSubmit={calculate} method="POST" className="flex-center">
+
+				<span className="label">Abschnitt</span>
+
 				<TextField
-					id="length" type="number" variant="filled"
+					id="length" type="number" variant="outlined"
 					label="L&auml;nge"
-					name="length" min=".5" max="200" step=".1"
-					endAdornment={<InputAdornment position="end">m</InputAdornment>} />
+					name="length" min=".5" max="200" step=".1" size="small" /> m
 
 				<TextField
 					id="height" name="height" select style={{ width: "100px" }}
-					variant="filled" label="H&ouml;he">
+					variant="outlined" label="H&ouml;he" defaultValue={100} size="small">
 					<MenuItem value={100}>1,00 m</MenuItem>
 					<MenuItem value={125}>1,25 m</MenuItem>
 					<MenuItem value={150}>1,50 m</MenuItem>
@@ -61,12 +63,10 @@ const Section = ({ changed, section, products, remove }) => {
 					<MenuItem value={250}>2,50 m</MenuItem>
 				</TextField>
 
-				<Button variant="contained" startIcon={<DeleteIcon />} onClick={remove(section.id)}>
-					Delete
-				</Button>
+				<IconButton aria-label="delete" onClick={remove(section.id)} className="right">
+					<DeleteIcon />
+				</IconButton>
 			</form>
-
-
 		</div>
 	);
 }

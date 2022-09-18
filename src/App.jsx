@@ -60,7 +60,7 @@ const App = () => {
 	});
 
 	return (
-		<div>
+		<div className="main">
 			{
 				elements.map(section =>
 					<div key={section.id}>

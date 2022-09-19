@@ -54,4 +54,12 @@ table tr:nth-child(2n+1) {
   font-weight: 600;
 }
 
+.add-section {
+  margin: 1rem;
+}
+
+.add-section Button {
+  margin: 0 .2rem;
+}
+
 /*# sourceMappingURL=index.61d3354a.css.map */

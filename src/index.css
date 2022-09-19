@@ -55,3 +55,11 @@ table tr:nth-child(odd) {
 .label {
     font-weight: 600;
 }
+
+.add-section {
+    margin: 1rem;
+}
+
+.add-section Button {
+    margin: 0 .2rem;
+}

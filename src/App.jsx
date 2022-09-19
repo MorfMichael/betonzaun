@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import { formatCurrency } from './misc/Methods';
+
 
 import Products from './misc/Products';
 
@@ -73,12 +76,16 @@ const App = () => {
 					</div>
 				)
 			}
+			<div className="add-section">
+				<Button variant="contained" startIcon={<AddIcon />}>Platte</Button>
+				<Button variant="contained" startIcon={<AddIcon />}>Steher</Button>
+				<Button variant="contained" startIcon={<AddIcon />}>Abschnitt</Button>
+			</div>
 			<select onChange={e => setInsertType(e.target.value || null)} value={insertType || ''}>
 				<option value="">&lt;Einf&uuml;gen&gt;</option>
 				<option value="Pillar">Steher</option>
 				<option value="Section">Abschnitt</option>
 			</select><br />
-			<button onClick={update}>berechnen</button>
 			<table border="0" cellSpacing="0">
 				<thead>
 					<tr>

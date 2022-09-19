@@ -55,11 +55,15 @@ table tr:nth-child(2n+1) {
 }
 
 .add-section {
+  align-items: center;
+  gap: .75rem;
   margin: 1rem;
+  display: flex;
 }
 
-.add-section Button {
-  margin: 0 .2rem;
+.add-error {
+  color: red;
+  text-align: center;
 }
 
 /*# sourceMappingURL=index.61d3354a.css.map */

@@ -58,8 +58,12 @@ table tr:nth-child(odd) {
 
 .add-section {
     margin: 1rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
 }
 
-.add-section Button {
-    margin: 0 .2rem;
+.add-error {
+    color: red;
+    text-align: center;
 }

@@ -9,6 +9,8 @@ import Products from './misc/Products';
 import Pillar from './components/Pillar';
 import Section from './components/Section';
 
+const limit = 5;
+
 const App = () => {
 
 	const [result, setResult] = useState([]);
@@ -22,6 +24,8 @@ const App = () => {
 		{ id: 3, type: 'Pillar', result: {} },
 	])
 
+	const [canAdd, setCanAdd] = useState(true);
+
 	useEffect(() => {
 		if (result) {
 			setSum(result.reduce((prev, curr, i) => prev += curr.count * curr.price, 0));
@@ -30,6 +34,8 @@ const App = () => {
 
 	useEffect(() => {
 		update();
+		console.log(elements.length),
+			setCanAdd(elements.length < limit);
 	}, [elements])
 
 	useEffect(() => {
@@ -62,6 +68,15 @@ const App = () => {
 		setResult(result);
 	});
 
+	const addElement = useCallback(type => {
+		let ids = elements.map(x => x.id);
+		let newId = (ids.length > 0 ? Math.max(...elements.map(x => x.id)) : 0) + 1;
+
+		setElements(elements.concat({ id: newId, type: type, result: {} }));
+	});
+
+
+
 	return (
 		<div className="main">
 			{
@@ -76,16 +91,14 @@ const App = () => {
 					</div>
 				)
 			}
-			<div className="add-section">
-				<Button variant="contained" startIcon={<AddIcon />}>Platte</Button>
-				<Button variant="contained" startIcon={<AddIcon />}>Steher</Button>
-				<Button variant="contained" startIcon={<AddIcon />}>Abschnitt</Button>
-			</div>
-			<select onChange={e => setInsertType(e.target.value || null)} value={insertType || ''}>
-				<option value="">&lt;Einf&uuml;gen&gt;</option>
-				<option value="Pillar">Steher</option>
-				<option value="Section">Abschnitt</option>
-			</select><br />
+			{canAdd &&
+				<div className="add-section">
+					<Button variant="contained" startIcon={<AddIcon />} onClick={() => addElement('Pillar')} disabled={!canAdd}>Steher</Button>
+					<Button variant="contained" startIcon={<AddIcon />} onClick={() => addElement('Plate')} disabled={!canAdd}>Platte</Button>
+					<Button variant="contained" startIcon={<AddIcon />} onClick={() => addElement('Section')} disabled={!canAdd}>Abschnitt</Button>
+				</div>
+			}
+			{!canAdd && <h4 className="add-error">Maximalanzahl ({limit}) erreicht!</h4>}
 			<table border="0" cellSpacing="0">
 				<thead>
 					<tr>

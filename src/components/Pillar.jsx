@@ -1,20 +1,37 @@
-import { useState, useCallback } from 'react';
-import { TextField, MenuItem, IconButton } from '@mui/material';
+import { useState, useCallback, useEffect } from 'react';
+import { TextField, MenuItem, IconButton, FormControl, Select, InputLabel } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const Pillar = ({ changed, section, products, remove }) => {
 
+	const [state, setState] = useState(
+		{
+			material: 'Beton',
+			variant: 'Endsteher',
+			height: 100,
+			count: 1,
+		});
+
 	const [error, setError] = useState('');
 
-	const calculate = useCallback((event) => {
-		setError(false);
-		let form = Object.fromEntries(new FormData(event.target.form).entries());
+	const handleChange = useCallback(event => {
+		state[event.target.name] = event.target.value;
+		setState({ ...state });
+	});
 
-		let product = products.find(x => x.type == "Pillar" && x.properties.height == form.height && x.properties.material == form.material && x.properties.variant == form.variant);
+	useEffect(() => {
+		calculate();
+		console.log(state);
+	}, [state]);
+
+	const calculate = useCallback(() => {
+		setError(false);
+
+		let product = products.find(x => x.type == "Pillar" && x.properties.height == state.height && x.properties.material == state.material && x.properties.variant == state.variant);
 
 		if (product) {
 			let res = {}
-			if (form.count > 0) res[product.id] = Number(form.count);
+			if (state.count > 0) res[product.id] = Number(state.count);
 			section.result = res;
 			changed();
 		} else {
@@ -26,18 +43,18 @@ const Pillar = ({ changed, section, products, remove }) => {
 
 	return (
 		<div className={`section ${error ? 'error' : ''}`}>
-			<form onChange={calculate} className="flex-center">
+			<div className="flex-center">
 				<span className="label">Steher</span>
 				<TextField
 					id="material" name="material" select stlye={{ width: "300px" }}
-					variant="outlined" label="Material" defaultValue="Beton" size="small">
+					variant="outlined" label="Material" defaultValue="Beton" size="small" value={state.material} onChange={handleChange}>
 					<MenuItem value="Beton">Beton</MenuItem>
 					<MenuItem value="Eisen">Eisen</MenuItem>
 				</TextField>
 
 				<TextField
 					id="variant" name="variant" label="Ausf&uuml;hrung" size="small" select
-					style={{ width: "200px" }} defaultValue="Endsteher">
+					style={{ width: "200px" }} defaultValue="Endsteher" value={state.variant} onChange={handleChange}>
 					<MenuItem value="Endsteher">Endsteher</MenuItem>
 					<MenuItem value="Mittelsteher">Mittelsteher</MenuItem>
 					<MenuItem value="90">90°</MenuItem>
@@ -45,8 +62,9 @@ const Pillar = ({ changed, section, products, remove }) => {
 				</TextField>
 
 				<TextField
-					id="height" name="height" select style={{ width: "100px" }}
-					variant="outlined" label="H&ouml;he" defaultValue={100} size="small">
+					id="height" name="height" style={{ width: "100px" }}
+					variant="outlined" select label="H&ouml;he"
+					defaultValue={100} size="small" value={state.height} onChange={handleChange}>
 					<MenuItem value={100}>1,00 m</MenuItem>
 					<MenuItem value={125}>1,25 m</MenuItem>
 					<MenuItem value={150}>1,50 m</MenuItem>
@@ -58,16 +76,17 @@ const Pillar = ({ changed, section, products, remove }) => {
 
 				<TextField
 					id="count" type="number" variant="outlined" label="Anzahl"
-					name="count" min="1" max="50" step="1" size="small" style={{ width: "100px" }} />
+					name="count" min="1" max="50" step="1" size="small" style={{ width: "100px" }}
+					value={state.count} onChange={handleChange} />
 
 				<IconButton aria-label="delete" onClick={remove(section.id)}>
 					<DeleteIcon />
 				</IconButton>
-			</form>
+			</div>
 			{error &&
-				<p>
+				<div className="error-text">
 					{error}
-				</p>}
+				</div>}
 		</div>
 	);
 }

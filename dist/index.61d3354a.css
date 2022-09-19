@@ -39,6 +39,11 @@ table tr:nth-child(2n+1) {
   border: 1px solid red;
 }
 
+.error-text {
+  color: red;
+  margin-top: .5rem;
+}
+
 .flex-center {
   align-items: center;
   gap: .75rem;

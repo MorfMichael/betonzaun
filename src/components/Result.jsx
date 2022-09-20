@@ -9,33 +9,29 @@ import Paper from '@mui/material/Paper';
 
 import { formatCurrency } from '../misc/Methods';
 
-export default ({products, elements}) => {
+export default ({ products, data }) => {
 
   const [result, setResult] = useState([]);
-	const [sum, setSum] = useState(0.0);
+  const [sum, setSum] = useState(0.0);
 
-	useEffect(() => {
-		if (result) {
-			setSum(result.reduce((prev, curr) => prev += curr.count * curr.price, 0));
-		}
-	}, [result]);
+  useEffect(() => {
+    if (result) {
+      setSum(result.reduce((prev, curr) => prev += curr.count * curr.price, 0));
+    }
+  }, [result]);
 
-  const update = useCallback(() => {
-    console.log('i am here!');
-    let res = elements.reduce((prev, cur) => {
-			Object.keys(cur.result).forEach(key => prev[key] ? prev[key] += cur.result[key] : prev[key] = cur.result[key]);
-			return prev;
-		}, {});
+  useEffect(() => {
+    if (!data) return;
 
-		let result = []
-		Object.keys(res).forEach(x => {
-			let prod = products.find(p => p.id == x);
-			if (prod) {
-				result.push({ ...prod, count: res[x] });
-			}
-		});
-		setResult(result);
-  });
+    let result = []
+    Object.keys(data).forEach(x => {
+      let prod = products.find(p => p.id == x);
+      if (prod) {
+        result.push({ ...prod, count: data[x] });
+      }
+    });
+    setResult(result);
+  }, [data]);
 
   return (
     <div className="result-container">
@@ -64,13 +60,13 @@ export default ({products, elements}) => {
                 <TableCell align="right">{formatCurrency(row.price * row.count)}</TableCell>
               </TableRow>
             ))}
+            <TableRow>
+              <TableCell><h3>Summe</h3></TableCell>
+              <TableCell align="right" colSpan={3}><h2>{formatCurrency(sum)}</h2></TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
-      <hr />
-			<div>
-				<h1>Summe: {formatCurrency(sum)}</h1>
-			</div>
     </div>
   );
 };

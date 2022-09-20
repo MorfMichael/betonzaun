@@ -6,7 +6,6 @@ import Products from './misc/Products';
 import Pillar from './components/Pillar';
 import Section from './components/Section';
 import Result from './components/Result';
-import { Subject } from 'rxjs';
 
 const limit = 5;
 

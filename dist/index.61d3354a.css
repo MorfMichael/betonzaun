@@ -2,26 +2,6 @@ html, body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-table, thead {
-  width: 50%;
-  min-width: 50vw;
-  border: 1px solid #000;
-  margin: 1rem;
-}
-
-th {
-  text-align: left;
-  border-bottom: 1px solid #000;
-}
-
-td, th {
-  padding: .5rem;
-}
-
-table tr:nth-child(2n+1) {
-  background: #ddd;
-}
-
 .main {
   width: 800px;
   min-width: 800px;
@@ -64,6 +44,10 @@ table tr:nth-child(2n+1) {
 .add-error {
   color: red;
   text-align: center;
+}
+
+.result-container {
+  margin: 1rem;
 }
 
 /*# sourceMappingURL=index.61d3354a.css.map */

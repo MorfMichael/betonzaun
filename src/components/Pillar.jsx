@@ -21,7 +21,6 @@ const Pillar = ({ changed, section, products, remove }) => {
 
 	useEffect(() => {
 		calculate();
-		console.log(state);
 	}, [state]);
 
 	const calculate = useCallback(() => {

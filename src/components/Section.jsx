@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { TextField, MenuItem, IconButton, Select, FormControl, InputLabel } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ChangeCircleRounded } from "@mui/icons-material";
 
 const calculatePlates = (height, length) => {
 	let plate50 = Math.floor(height / 50);
@@ -43,36 +44,34 @@ const Section = ({ changed, section, products, remove }) => {
 
 	const calculate = useCallback(() => {
 		setError('');
-		if (changed) {
-			let count = calculatePlates(state.height, state.length);
+		let count = calculatePlates(state.height, state.length);
 
-			let pillar = products.find(x => x.type == "Pillar" && x.properties.height == state.height && x.properties.variant == "Mittelsteher" && x.properties.material == "Beton");
-			let plate50 = products.find(x => x.type == "Plate" && x.properties.height == 50 && x.properties.material == "Beton" && x.properties.pattern == "Steinoptik");
-			let plate25 = products.find(x => x.type == "Plate" && x.properties.height == 25 && x.properties.material == "Beton" && x.properties.pattern == "Steinoptik");
+		let pillar = products.find(x => x.type == "Pillar" && x.properties.height == state.height && x.properties.variant == "Mittelsteher" && x.properties.material == "Beton");
+		let plate50 = products.find(x => x.type == "Plate" && x.properties.height == 50 && x.properties.material == "Beton" && x.properties.pattern == "Steinoptik");
+		let plate25 = products.find(x => x.type == "Plate" && x.properties.height == 25 && x.properties.material == "Beton" && x.properties.pattern == "Steinoptik");
 
-			if (!pillar) {
-				setError('no pillar found!');
-				return;
-			}
-
-			if (!plate50) {
-				setError('no plate50 found!');
-				return;
-			}
-
-			if (!plate25) {
-				setError('no plate25 found!');
-				return;
-			}
-
-			let res = {};
-			if (count.plate50 > 0) res[plate50.id] = count.plate50;
-			if (count.plate25 > 0) res[plate25.id] = count.plate25;
-			if (count.pillars > 0) res[pillar.id] = count.pillars;
-
-			section.result = res;
-			changed();
+		if (!pillar) {
+			setError('no pillar found!');
+			return;
 		}
+
+		if (!plate50) {
+			setError('no plate50 found!');
+			return;
+		}
+
+		if (!plate25) {
+			setError('no plate25 found!');
+			return;
+		}
+
+		let res = {};
+		if (count.plate50 > 0) res[plate50.id] = count.plate50;
+		if (count.plate25 > 0) res[plate25.id] = count.plate25;
+		if (count.pillars > 0) res[pillar.id] = count.pillars;
+
+		section.result = res;
+		changed();
 	});
 
 	useEffect(() => {

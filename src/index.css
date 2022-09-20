@@ -2,28 +2,6 @@ html, body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
-table, thead {
-    margin: 1rem;
-    border: 1px solid black;
-    width: 50%;
-    min-width: 50vw;
-}
-
-th {
-    border-bottom: 1px solid black;
-    text-align: left;
-}
-
-td, th {
-    padding: .5rem;
-}
-
-
-table tr:nth-child(odd) {
-    background: #ddd;
-}
-
 .main {
     width: 800px;
     min-width: 800px;
@@ -66,4 +44,8 @@ table tr:nth-child(odd) {
 .add-error {
     color: red;
     text-align: center;
+}
+
+.result-container {
+    margin: 1rem;
 }

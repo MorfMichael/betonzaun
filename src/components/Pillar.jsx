@@ -13,6 +13,7 @@ const Pillar = ({ changed, section, products, remove }) => {
 		});
 
 	const [error, setError] = useState('');
+	const [removed,setRemoved] = useState(false);
 
 	const handleChange = useCallback(event => {
 		state[event.target.name] = event.target.value;
@@ -40,8 +41,13 @@ const Pillar = ({ changed, section, products, remove }) => {
 		}
 	})
 
+	const _remove = useCallback(() => {
+		setRemoved(true);
+		setTimeout(() => remove(section.id), 500);
+	});
+
 	return (
-		<div className={`section ${error ? 'error' : ''}`}>
+		<div className={['section', error && 'error', removed && 'remove'].filter(Boolean).join(' ')}>
 			<div className="flex-center">
 				<span className="label">Steher</span>
 				<TextField
@@ -78,7 +84,7 @@ const Pillar = ({ changed, section, products, remove }) => {
 					name="count" min="1" max="50" step="1" size="small" style={{ width: "100px" }}
 					value={state.count} onChange={handleChange} />
 
-				<IconButton aria-label="delete" onClick={remove(section.id)}>
+				<IconButton aria-label="delete" onClick={_remove}>
 					<DeleteIcon />
 				</IconButton>
 			</div>

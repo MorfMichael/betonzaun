@@ -30,7 +30,7 @@ const App = () => {
 		setElements(elements.concat({ id: newId, type: type, result: {} }));
 	});
 
-	const removeElement = useCallback((id) => (event) => {
+	const removeElement = useCallback((id) => {
 		setElements(elements.filter(x => x.id != id));
 	});
 
@@ -46,14 +46,12 @@ const App = () => {
 		<div className="main">
 			{
 				elements.map(section =>
-					<div key={section.id}>
-						{
+						(
 							{
-								Pillar: <Pillar changed={updateResult} section={section} products={Products} remove={removeElement} />,
-								Section: <Section changed={updateResult} section={section} products={Products} remove={removeElement} />,
+								Pillar: <Pillar key={section.id} changed={updateResult} section={section} products={Products} remove={removeElement} />,
+								Section: <Section key={section.id} changed={updateResult} section={section} products={Products} remove={removeElement} />,
 							}[section.type]
-						}
-					</div>
+						)
 				)
 			}
 			{canAdd &&

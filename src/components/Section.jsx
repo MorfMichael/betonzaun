@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { TextField, MenuItem, IconButton, Select, FormControl, InputLabel } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { ChangeCircleRounded } from "@mui/icons-material";
 
 const calculatePlates = (height, length) => {
 	let plate50 = Math.floor(height / 50);
@@ -36,10 +35,16 @@ const Section = ({ changed, section, products, remove }) => {
 	});
 
 	const [error, setError] = useState('');
+	const [removed,setRemoved] = useState(false);
 
 	const handleChange = useCallback(event => {
 		state[event.target.name] = event.target.value;
 		setState({ ...state });
+	});
+
+	const _remove = useCallback(() => {
+		setRemoved(true);
+		setTimeout(() => remove(section.id), 500);
 	});
 
 	const calculate = useCallback(() => {
@@ -79,7 +84,7 @@ const Section = ({ changed, section, products, remove }) => {
 	}, [state]);
 
 	return (
-		<div className={`section ${error ? 'error' : ''} `}>
+		<div className={['section', error && 'error', removed && 'remove'].filter(Boolean).join(' ')}>
 			<div className="flex-center">
 				<span className="label">Abschnitt</span>
 
@@ -95,7 +100,7 @@ const Section = ({ changed, section, products, remove }) => {
 					{options.map((x, i) => <MenuItem key={x.value} value={x.value}>{x.label}</MenuItem>)}
 				</TextField>
 
-				<IconButton aria-label="delete" onClick={remove(section.id)}>
+				<IconButton aria-label="delete" onClick={_remove}>
 					<DeleteIcon />
 				</IconButton>
 			</div>

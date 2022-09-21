@@ -22,14 +22,20 @@ html, body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+  background: #eef;
+}
+
 .main {
   width: 800px;
   min-width: 800px;
+  margin: 0 auto;
 }
 
 .section {
   width: auto;
   opacity: 1;
+  background: #fff;
   border-radius: 5px;
   margin: 1rem;
   padding: 1rem;
@@ -74,6 +80,16 @@ html, body {
 }
 
 .result-container {
+  margin: 1rem;
+}
+
+.logo {
+  width: 400px;
+  margin: 0 0 0 auto;
+  display: block;
+}
+
+.title {
   margin: 1rem;
 }
 

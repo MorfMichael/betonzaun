@@ -12,12 +12,18 @@ html, body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+    background: #eef;
+}
+
 .main {
     width: 800px;
     min-width: 800px;
+    margin: 0 auto;
 }
 
 .section {
+    background: white;
     border-radius: 5px;
     box-shadow: 1px 1px 2px #000;
     margin: 1rem;
@@ -65,5 +71,15 @@ html, body {
 }
 
 .result-container {
+    margin: 1rem;
+}
+
+.logo {
+    display: block;
+    width: 400px;
+    margin: 0 0 0 auto;
+}
+
+.title {
     margin: 1rem;
 }

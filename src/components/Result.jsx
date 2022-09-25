@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, forwardRef, useImperativeHandle } from 'react';
+import { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,6 +8,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import { formatCurrency } from '../misc/Methods';
+
+
+const _tableHeaderStyle = {
+  fontWeight: 'bold'
+};
 
 export default ({ products, data }) => {
 
@@ -40,10 +45,10 @@ export default ({ products, data }) => {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Beschreibung</TableCell>
-              <TableCell align="right">Anzahl</TableCell>
-              <TableCell align="right">Einzelpreis</TableCell>
-              <TableCell align="right">Preis</TableCell>
+              <TableCell sx={_tableHeaderStyle}>Beschreibung</TableCell>
+              <TableCell sx={_tableHeaderStyle} align="right">Anzahl</TableCell>
+              <TableCell sx={_tableHeaderStyle} align="right">Einzelpreis</TableCell>
+              <TableCell sx={_tableHeaderStyle} align="right">Preis</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

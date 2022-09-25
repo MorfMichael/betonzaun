@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState, useRef } from 'react';
 import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
+import logo from './images/logo.png';
+
 import Products from './misc/Products';
 import Pillar from './components/Pillar';
 import Section from './components/Section';
@@ -44,6 +46,11 @@ const App = () => {
 
 	return (
 		<div className="main">
+			<div className="header">
+				<h2>Betonzaunrechner</h2>
+				<img src={logo} className="header-logo" />
+			</div>
+
 			{
 				elements.map(section =>
 						(

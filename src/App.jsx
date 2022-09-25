@@ -6,6 +6,7 @@ import logo from './images/logo.png';
 
 import Products from './misc/Products';
 import Pillar from './components/Pillar';
+import Plate from './components/Plate';
 import Section from './components/Section';
 import Result from './components/Result';
 
@@ -56,6 +57,7 @@ const App = () => {
 						(
 							{
 								Pillar: <Pillar key={section.id} changed={updateResult} section={section} products={Products} remove={removeElement} />,
+								Plate: <Plate key={section.id} changed={updateResult} section={section} products={Products} remove={removeElement} />,
 								Section: <Section key={section.id} changed={updateResult} section={section} products={Products} remove={removeElement} />,
 							}[section.type]
 						)

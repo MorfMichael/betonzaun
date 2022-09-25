@@ -36,7 +36,7 @@ const Pillar = ({ changed, section, products, remove }) => {
 			changed();
 		} else {
 			section.result = {};
-			setError('no pillar found!');
+			setError('Kein Steher gefunden!');
 			changed();
 		}
 	})

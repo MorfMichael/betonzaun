@@ -48,7 +48,7 @@ const App = () => {
 	return (
 		<div className="main">
 			<div className="header">
-				<h2>Betonzaunrechner test</h2>
+				<h2>Betonzaunrechner</h2>
 				<img src={logo} className="header-logo" />
 			</div>
 
